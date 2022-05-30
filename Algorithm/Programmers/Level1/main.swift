@@ -2,34 +2,19 @@
 //  main.swift
 //  Algorithm
 //
-//  Created by 김승창 on 2022/05/28.
+//  Created by 김승창 on 2022/05/30.
 //
 
 import Foundation
 
-func solution(_ n: Int, _ lost: [Int], _ reserve: [Int]) -> Int {
-    var students: [Int] = []
-    for i in 0..<n {
-        students.append(1)
-        
-        if lost.contains(i+1) {
-            students[i] -= 1
-        }
-        if reserve.contains(i+1) {
-            students[i] += 1
-        }
-    }
-    
-    for i in 0..<n {
-        if i > 0 && students[i] == 2 && students[i-1] == 0 {
-            students[i] -= 1
-            students[i-1] += 1
-        }
-        if i < n-1 && students[i] == 2 && students[i+1] == 0 {
-            students[i] -= 1
-            students[i+1] += 1
-        }
-    }
-    
-    return students.filter { $0 > 0 }.count
+//func solution(_ absolutes: [Int], _ signs: [Bool]) -> Int {
+//    var answer = 0
+//    for i in 0..<absolutes.count {
+//        answer += signs[i] ? absolutes[i] : -absolutes[i]
+//    }
+//    return answer
+//}
+
+func solution(_ absolutes: [Int], _ signs: [Bool]) -> Int {
+    return (0..<absolutes.count).map { signs[$0] ? absolutes[$0] : -absolutes[$0] }.reduce(0, +)
 }
